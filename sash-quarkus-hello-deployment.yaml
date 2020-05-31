@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sash-quarkus
+spec:
+  selector:
+    matchLabels:
+      greeting: hello
+      department: world
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        greeting: hello
+        department: world
+    spec:
+      containers:
+      - name: sash
+        image: "mosesalphonse/quarkus:1"
+        env:
+        - name: "PORT"
+          value: "8080"
