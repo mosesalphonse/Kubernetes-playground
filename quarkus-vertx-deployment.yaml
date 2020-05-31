@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sash-vertx-deployment
+spec:
+  selector:
+    matchLabels:
+      greeting: hello
+      department: vertx
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        greeting: hello
+        department: vertx
+    spec:
+      containers:
+      - name: vertx
+        image: "gcr.io/moses-k8/quarkus-vertx-jvm:1"
+        ports:
+        - containerPort: 8080
