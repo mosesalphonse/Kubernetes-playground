@@ -12,4 +12,4 @@ kubectl expose deployment sash-quarkus --type=LoadBalancer --name=quarkus-hello-
 
 <b>verify:</b>
 
-curl <External LB IP>:8080/hello
+curl {External LB IP}:8080/hello
