@@ -17,6 +17,5 @@ spec:
       containers:
       - name: sash
         image: "mosesalphonse/quarkus:1"
-        env:
-        - name: "PORT"
-          value: "8080"
+        ports:
+        - containerPort: 8080
