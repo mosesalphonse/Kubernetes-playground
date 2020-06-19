@@ -1,0 +1,52 @@
+enable namespace for automatic sidecar injection:
+==================================================
+kubectl label namespace default istio-injection=enabled
+
+kubectl get ns --show-labels
+
+Deploy your application using the kubectl command:
+=================================================
+kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+To confirm that the Bookinfo within the cluster by logining into pod:
+====================================================================
+kubectl exec -it "$(kubectl get pod -l app=ratings -o jsonpath='{.items[0].metadata.name}')" -c ratings -- curl productpage:9080/productpage | grep -o "<title>.*</title>"
+
+
+Login into the pod:
+==================
+kubectl exec -it <pod name> sh
+
+which curl
+
+curl productpage:9080/productpage
+
+find ingress gateway IP:
+======================
+kubectl -n istio-system get svc
+
+Define the ingress gateway to access the application from outside cluster:
+==========================================================================
+
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+kubectl get gateway
+
+kubectl describe gateway bookinfo-gateway
+
+kubectl -n istio-system get svc istio-ingressgateway
+
+http://{ext IP of istio-ingressgateway}/productpage
+
+Note: Hit the above URL multiple times, so that diff review versions will be rendered.
+
+delete:
+======
+kubectl delete -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+kubectl delete -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+ref : https://www.youtube.com/watch?v=7D6wvqdJ9oU&list=PL34sAs7_26wPkw9g-5NQPP_rHVzApGpKP&index=3
+
+
+

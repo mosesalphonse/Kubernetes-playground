@@ -1,0 +1,31 @@
+usefull commands:
+================
+
+/home/moses_alphonse/istio-1.6.2/bin
+
+export PATH=/home/moses_alphonse/istio-1.6.2/bin:$PATH
+
+service discovery:
+=================
+
+logininto one of the pod and find the service dns:
+=================================================
+
+kubectl exec -it <<pod-name>> sh
+
+then:
+====
+nslookup <<service-name>>
+
+or:
+==
+getent hosts <<service-name>>
+
+example service dns name : sash-hello-service.default.svc.cluster.local
+
+tag for GCR:
+==========
+
+docker tag quarkus/rest-client-jvm:latest gcr.io/moses-k8/rest-client:2.0.0
+
+
