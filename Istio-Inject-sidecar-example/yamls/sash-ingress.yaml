@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/backends: '{"k8s-be-30750--078e3e83e5d13556":"HEALTHY"}'
+    ingress.kubernetes.io/forwarding-rule: k8s2-fr-vjaljk4o-default-sash-ingress-qfvlt6c8
+    ingress.kubernetes.io/target-proxy: k8s2-tp-vjaljk4o-default-sash-ingress-qfvlt6c8
+    ingress.kubernetes.io/url-map: k8s2-um-vjaljk4o-default-sash-ingress-qfvlt6c8
+  creationTimestamp: "2020-06-18T18:20:33Z"
+  finalizers:
+  - networking.gke.io/ingress-finalizer-V2
+  generation: 1
+  name: sash-ingress
+  namespace: default
+  resourceVersion: "1412987"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/sash-ingress
+  uid: 022ba57e-ff9c-433d-9279-1ec114a4186b
+spec:
+  backend:
+    serviceName: sash-rest-client-service
+    servicePort: 8080
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.190.94.113

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-06-18T10:25:40Z"
+  labels:
+    app: sash-hello
+    version: "1.0"
+  name: sash-hello-service
+  namespace: default
+  resourceVersion: "1272609"
+  selfLink: /api/v1/namespaces/default/services/sash-hello-service
+  uid: 4348ba6c-b6ad-4ab3-ac43-2b0fbf8e94fc
+spec:
+  clusterIP: 10.0.6.193
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: sash-hello
+    version: "1.0"
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
