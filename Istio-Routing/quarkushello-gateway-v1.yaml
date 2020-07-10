@@ -1,0 +1,78 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: quarkus-hello-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: quarkushello-default
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - quarkus-hello-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    rewrite:
+      uri: "/sash-hello/hello"
+    route:
+    - destination:
+        host: quarkushello-v1
+        port:
+          number: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: quarkushello-hello
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - quarkus-hello-gateway
+  http:
+  - match:
+    - uri:
+        exact: /hello
+    rewrite:
+      uri: "/sash-hello/hello"
+    route:
+    - destination:
+        host: quarkushello-v1
+        port:
+          number: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: quarkushello-health
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - quarkus-hello-gateway
+  http:
+  - match:
+    - uri:
+        exact: /health
+    rewrite:
+      uri: "/sash-hello/health"
+    route:
+    - destination:
+        host: quarkushello-v1
+        port:
+          number: 8080
+---
